@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State bind</title>
+</head>
+
+<body>
+    <h1 id="title">组件状态</h1>
+    <div id='test'></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+        class Weather extends React.Component {
+            constructor(props) {
+                super(props)
+                this.state = {
+                    isHot: false,
+                    wind: '微风'
+                }
+                // 为了在事件回调中使用this，需要类方法绑定到this实例上
+                // 右侧语句会从类原型对象中查找handleClick方法
+                // 赋值语句后，实例对象this就有了一个handleClick属性，此后的调用就会优先查找实例的属性
+                this.handleClick = this.handleClick.bind(this)
+            }
+            // render方法存放在MyComponent的原型对象上
+            render() {
+                console.log("this对象：", this)
+                const temp = this.state.isHot ? "炎热" : "凉爽";
+                // 时间绑定
+                return <h2 onClick={this.handleClick}>今天天气很{temp}！{this.state.wind}</h2>
+            }
+
+            // 类方法中默认开启了严格模式，因此this对象为undefined
+            handleClick() {
+                console.log('天气被点击了, state=', this.state)
+                // 直接修改属性不会驱动页面变化
+                // this.state.isHot = !this.state.isHot
+                // 只有通过调用setState才能用数据驱动页面的更改，数据修改是一种增量更新，而不是替换
+                let hot = this.state.isHot
+                this.setState({ isHot: !hot })
+                console.log("状态被更新了，state=", this.state)
+            }
+        }
+
+        // 渲染组件到页面
+        ReactDOM.render(
+            <Weather />,
+            document.getElementById('test')
+        )
+
+        function demoClick() {
+            console.log("天气被点击了！")
+        }
+
+        // 原生JS的时间绑定
+        // 1.Listener
+        const title = document.getElementById('title')
+        title.addEventListener('click', () => {
+            console.log("标题被点击了！")
+        });
+
+        // 2.onclick
+        title.onclick = () => {
+            console.log('标题又被点击了！')
+        }
+
+    </script>
+</body>
+
+</html>

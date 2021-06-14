@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this pointer</title>
+</head>
+
+<body>
+    <script>
+        class Person {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+            }
+
+            study() {
+                console.log("this对象: ", this)
+            }
+        }
+
+        // this调用
+        let p = new Person("张三", 29)
+        // 
+        p.study()
+
+        // 非this调用，只是取出了类中的方法，赋值到堆内存的变量
+        let func = p.study
+        func()
+
+        // 绑定后调用，就是通过实例调用
+        bindFunc = p.study.bind(p)
+        bindFunc()
+    </script>
+</body>
+
+</html>

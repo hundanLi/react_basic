@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Component</title>
+</head>
+
+<body>
+
+    <div id='test'></div>
+
+    <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+    <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+    <script type="text/babel">
+        class MyComponent extends React.Component {
+            // render方法存放在MyComponent的原型对象上
+            render() {
+                console.log("this对象：", this)
+                return <h2>我是类式组件</h2>
+            }
+        }
+
+        // 渲染组件到页面
+        ReactDOM.render(
+            <MyComponent />,
+            document.getElementById('test')
+        )
+
+        /*
+            执行渲染时发生了什么？
+            1.React解析组件标签，找到MyComponent组件
+            2.发现该组件是类式组件，随后创建该类的实例，并通过实例调用render方法
+            3.将render方法返回的虚拟DOM转换为真实DOM，然后呈现在页面中
+        */
+    </script>
+</body>
+
+</html>
