@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise</title>
+</head>
+<body>
+<!-- 准备容器 -->
+<div id="test"></div>
+<!-- react核心库 -->
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<!-- react-dom库 -->
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- babel，用于将jsx转换成js -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+
+<script type="text/babel">
+  // 模拟数据
+  const data = ['Angular', 'React', 'Vue']
+  
+  // 虚拟DOM
+  const dom = (
+    <div>
+      <h1>前端框架列表</h1>
+      <ul>
+        {data.map((value, index) => {
+          return <li key={index}>{value}</li>
+        })}
+      </ul>
+    </div>
+  )
+  // 渲染页面
+  ReactDOM.render(
+    dom,
+    document.getElementById('test')
+  )
+</script>
+
+
+</body>
+</html>

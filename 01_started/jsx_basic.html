@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSX</title>
+    <style>
+        .title {
+            background-color: blueviolet;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+<!-- 准备容器 -->
+<div id="test"></div>
+<!-- react核心库 -->
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<!-- react-dom库 -->
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- babel，用于将jsx转换成js -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+<script type=text/babel>
+    const id = "hundanLi"
+    const data = "Hello, react"
+
+    // 创建虚拟DOM
+    const vdom = (
+        <div>
+            <h2 className="title" id={id.toLowerCase()}>
+                <span style={{color: 'green', fontSize: 29}}>{data}</span>
+            </h2>
+            <label>
+                <input type="text"/>
+            </label>
+        </div>
+    )
+    // 渲染页面
+    ReactDOM.render(
+        vdom,
+        document.getElementById('test')
+    )
+
+</script>
+</body>
+</html> 

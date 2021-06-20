@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // 创建Person类
+        class Person {
+            // 构造器方法
+            constructor(name, age){
+                // this代表Perosn实例对象
+                this.name = name;
+                this.age = age;
+            }
+            // 一般方法，它被放在类的原型对象上，供示例使用
+            // this表示调用方法的Person实例
+            speek() {
+                console.log(`我叫${this.name}, 我的年龄是${this.age}`)
+            }
+
+
+        }
+
+        // 创建Person对象
+        const p1 = new Person("Tom", 19);
+        const p2 = new Person("John", 20);
+        console.log(p1);
+        console.log(p2);
+
+        p1.speek()
+        p2.speek()
+        p1.speek.call({a:1, b:2})
+
+        // 类的继承
+        class Student extends Person {
+            constructor(name, age, grade) {
+                // 必须在最开始时调用super
+                super(name, age)
+                this.grade = grade
+            }
+
+            // 方法重写
+            speek() {
+                console.log(`我叫${this.name}, 年龄是${this.age}, 年级是${this.grade}`)
+            }
+
+            study() {
+                console.log("我很努力地学习！")
+            }
+        }
+        const s1 = new Student("章三", 30, "高三");
+        console.log(s1)
+        s1.speek()
+        s1.study()
+
+    </script>
+</body>
+</html>
